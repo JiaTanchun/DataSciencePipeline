@@ -1,0 +1,23 @@
+
+hdfs namenode -format
+start-all.sh
+jps
+
+
+hadoop fs -mkdir /count
+
+hadoop fs -mkdir /count/input
+
+cd /Users/chenxiaofeng/wordcount
+
+hadoop fs -put heidi.txt /count/input/
+
+hadoop jar wc.jar WordCount /count/input/warandpeace.txt ouput_01
+
+
+hadoop com.sun.tools.javac.Main WordCount.java
+jar cf wc.jar WordCount*.class
+
+hadoop jar wc.jar WordCount -Dwordcount.case.sensitive=false /count /count/output_1 -skip /heiyyy/patterns.txt
+
+hadoop fs -cat /count/output_1/part-r-00000 | sort -k2,2nr | head -n 25
